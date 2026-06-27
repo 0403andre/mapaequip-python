@@ -1,0 +1,58 @@
+<div class="form-grid">
+    <label>Nome do equipamento
+        <input name="nome_equipamento" required value="{{ equipamento.nome_equipamento if equipamento else '' }}" placeholder="Ex.: Notebook Dell Latitude">
+    </label>
+
+    <label>Tipo
+        <select name="tipo_equipamento" required>
+            {% set tipo_atual = equipamento.tipo_equipamento if equipamento else '' %}
+            <option value="">Selecione</option>
+            <option value="Notebook" {{ "selected" if tipo_atual == "Notebook" else "" }}>Notebook</option>
+            <option value="Computador" {{ "selected" if tipo_atual == "Computador" else "" }}>Computador</option>
+            <option value="Impressora" {{ "selected" if tipo_atual == "Impressora" else "" }}>Impressora</option>
+        </select>
+    </label>
+
+    <label>Patrimônio
+        <input name="patrimonio" required value="{{ equipamento.patrimonio if equipamento else '' }}" placeholder="Ex.: 123456">
+    </label>
+
+    <label>Número de série
+        <input name="numero_serie" value="{{ equipamento.numero_serie if equipamento else '' }}" placeholder="Ex.: ABC123XYZ">
+    </label>
+
+    <label>Hostname
+        <input name="hostname" value="{{ equipamento.hostname if equipamento else '' }}" placeholder="Ex.: NTB-FIN-001">
+    </label>
+
+    <label>IP
+        <input name="ip" value="{{ equipamento.ip if equipamento else '' }}" placeholder="Ex.: 10.10.1.55">
+    </label>
+
+    <label>Setor
+        <input name="setor" value="{{ equipamento.setor if equipamento else '' }}" placeholder="Ex.: Financeiro">
+    </label>
+
+    <label>Localização
+        <input name="localizacao" value="{{ equipamento.localizacao if equipamento else '' }}" placeholder="Ex.: 3º Andar - Sala 301">
+    </label>
+
+    <label>Responsável
+        <input name="responsavel" value="{{ equipamento.responsavel if equipamento else '' }}" placeholder="Ex.: Mavila Silva">
+    </label>
+
+    <label>Status
+        <select name="status" required>
+            {% set status_atual = equipamento.status if equipamento else '' %}
+            <option value="">Selecione</option>
+            <option value="Em uso" {{ "selected" if status_atual == "Em uso" else "" }}>Em uso</option>
+            <option value="Disponível" {{ "selected" if status_atual == "Disponível" else "" }}>Disponível</option>
+            <option value="Manutenção" {{ "selected" if status_atual == "Manutenção" else "" }}>Manutenção</option>
+            <option value="Baixado" {{ "selected" if status_atual == "Baixado" else "" }}>Baixado</option>
+        </select>
+    </label>
+
+    <label class="full">Observações
+        <textarea name="observacoes" placeholder="Informações adicionais...">{{ equipamento.observacoes if equipamento else '' }}</textarea>
+    </label>
+</div>

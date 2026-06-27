@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="page-header">
+    <a class="icon-link" href="{{ url_for('listagem') }}">‹</a>
+    <h1>Confirmar Exclusão</h1>
+    <span></span>
+</header>
+
+<section class="content page-content">
+    <section class="delete-card">
+        <div class="warning-icon">!</div>
+        <h2>Excluir Equipamento</h2>
+        <p>Deseja realmente excluir este equipamento?</p>
+
+        <div class="delete-details">
+            <div><strong>Nome:</strong> {{ equipamento.nome_equipamento }}</div>
+            <div><strong>Hostname:</strong> {{ equipamento.hostname }}</div>
+            <div><strong>Patrimônio:</strong> {{ equipamento.patrimonio }}</div>
+            <div><strong>ID:</strong> {{ equipamento.id }}</div>
+        </div>
+
+        <p class="warning-text">Essa ação não poderá ser desfeita.</p>
+
+        <form method="post" class="delete-actions">
+            <a class="btn btn-secondary" href="{{ url_for('listagem') }}">Cancelar</a>
+            <button class="btn btn-danger" type="submit">⌫ Confirmar Exclusão</button>
+        </form>
+    </section>
+</section>
+{% endblock %}

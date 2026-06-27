@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="page-header">
+    <a class="icon-link" href="{{ url_for('home') }}">‹</a>
+    <h1>Cadastrar Equipamento</h1>
+    <span></span>
+</header>
+
+<section class="content page-content">
+    <form class="form-card" method="post">
+        {% set equipamento = None %}
+        {% include "_form.html" %}
+        <button class="btn btn-primary full-btn" type="submit">▣ Salvar Equipamento</button>
+    </form>
+</section>
+{% endblock %}

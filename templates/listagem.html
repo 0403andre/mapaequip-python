@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="page-header">
+    <a class="icon-link" href="{{ url_for('home') }}">‹</a>
+    <h1>Equipamentos</h1>
+    <span class="icon-link">☰</span>
+</header>
+
+<section class="content page-content">
+    <form class="search-form" method="get">
+        <input type="search" name="q" value="{{ termo }}" placeholder="Buscar por hostname, IP ou patrimônio...">
+        <div class="filter-row">
+            <select name="tipo">
+                <option value="">Todos os tipos</option>
+                <option value="Notebook" {{ "selected" if tipo == "Notebook" else "" }}>Notebook</option>
+                <option value="Computador" {{ "selected" if tipo == "Computador" else "" }}>Computador</option>
+                <option value="Impressora" {{ "selected" if tipo == "Impressora" else "" }}>Impressora</option>
+            </select>
+            <select name="status">
+                <option value="">Todos os status</option>
+                <option value="Em uso" {{ "selected" if status == "Em uso" else "" }}>Em uso</option>
+                <option value="Disponível" {{ "selected" if status == "Disponível" else "" }}>Disponível</option>
+                <option value="Manutenção" {{ "selected" if status == "Manutenção" else "" }}>Manutenção</option>
+                <option value="Baixado" {{ "selected" if status == "Baixado" else "" }}>Baixado</option>
+            </select>
+            <button class="mini-btn" type="submit">Filtrar</button>
+        </div>
+    </form>
+
+    {% if equipamentos %}
+        <div class="equipment-list">
+            {% for item in equipamentos %}
+                <article class="equipment-card">
+                    <div class="equipment-icon">
+                        {% if item.tipo_equipamento == "Impressora" %}🖨️{% elif item.tipo_equipamento == "Computador" %}🖥️{% else %}💻{% endif %}
+                    </div>
+                    <div class="equipment-body">
+                        <h2>{{ item.nome_equipamento or "Sem nome" }}</h2>
+                        <span class="status-pill status-{{ item.status|replace(' ', '-')|lower }}">{{ item.status or "Sem status" }}</span>
+                        <dl>
+                            <div><dt>Tipo:</dt><dd>{{ item.tipo_equipamento }}</dd></div>
+                            <div><dt>Patrimônio:</dt><dd>{{ item.patrimonio }}</dd></div>
+                            <div><dt>Hostname:</dt><dd>{{ item.hostname }}</dd></div>
+                            <div><dt>IP:</dt><dd>{{ item.ip }}</dd></div>
+                            <div><dt>Setor:</dt><dd>{{ item.setor }}</dd></div>
+                            <div><dt>Localização:</dt><dd>{{ item.localizacao }}</dd></div>
+                        </dl>
+                        <div class="card-actions">
+                            <a class="btn-small btn-edit" href="{{ url_for('edicao', equipamento_id=item.id) }}">✎ Editar</a>
+                            <a class="btn-small btn-delete" href="{{ url_for('exclusao', equipamento_id=item.id) }}">⌫ Excluir</a>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <section class="empty-state">
+            <div>📦</div>
+            <h2>Nenhum equipamento encontrado</h2>
+            <p>Cadastre um equipamento ou ajuste os filtros.</p>
+            <a class="btn btn-primary" href="{{ url_for('cadastro') }}">Cadastrar Equipamento</a>
+        </section>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MapaEquip</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="app-shell">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <section class="toast-area">
+                {% for category, message in messages %}
+                    <div class="toast toast-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </section>
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+    <nav class="bottom-nav">
+        <a class="{{ 'active' if active == 'home' else '' }}" href="{{ url_for('home') }}">
+            <span>⌂</span><small>Início</small>
+        </a>
+        <a class="{{ 'active' if active == 'equipamentos' else '' }}" href="{{ url_for('listagem') }}">
+            <span>▦</span><small>Equipamentos</small>
+        </a>
+        <a class="{{ 'active' if active == 'cadastro' else '' }}" href="{{ url_for('cadastro') }}">
+            <span class="plus">+</span><small>Adicionar</small>
+        </a>
+        <a href="#"><span>▥</span><small>Relatórios</small></a>
+        <a href="#"><span>◯</span><small>Perfil</small></a>
+    </nav>
+</main>
+</body>
+</html>
