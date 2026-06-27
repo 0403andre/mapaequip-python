@@ -8,7 +8,6 @@
 
 <section class="content page-content">
     <form class="form-card" method="post">
-        <input type="hidden" name="id" value="{{ equipamento.id }}">
         {% include "_form.html" %}
         <div class="form-actions">
             <a class="btn btn-danger-outline" href="{{ url_for('exclusao', equipamento_id=equipamento.id) }}">⌫ Excluir</a>
